@@ -57,7 +57,7 @@ const About = () => {
               Bob Johnson
             </h3>
             <p className="text-lg text-gray-400">Designer</p>
-            <h1 className="text-[100px] text-white">Akash Chaudhary</h1>
+            <h1 className="text-[100px] text-white">Akash Kaushik</h1>
           </li>
         </ul>
       </div>
