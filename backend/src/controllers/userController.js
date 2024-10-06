@@ -1,6 +1,10 @@
 import { User } from "../models/user.models.js";
 import bcrypt from "bcryptjs";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
+import jwt  from "jsonwebtoken";
+
+
+const JWT_SECRET = process.env.JWT_SECRET
 
 const registerUser = async (req, res) => {
   const {
@@ -33,7 +37,7 @@ const registerUser = async (req, res) => {
       return res.status(400).json({ message: "User already exists!" });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // const hashedPassword = await bcrypt.hash(password, 10);
 
     const avatar = await uploadOnCloudinary(avatarLocalPath);
     if (!avatar) {
@@ -45,7 +49,7 @@ const registerUser = async (req, res) => {
       email,
       gender,
       avatar: avatar.url,
-      password: hashedPassword,
+      password,
       licenseNo,
       licenseExpiryDate,
       address,
@@ -62,4 +66,49 @@ const registerUser = async (req, res) => {
   }
 };
 
-export { registerUser };
+const loginUser  = async (req, res) => {
+  const { email, password } = req.body;
+  console.log(req.body);
+  
+  if (!(email  && password)) {
+
+    return res.status(400).json("Email or Password required!")
+  }
+
+  try {
+    const user = await User.findOne({email})
+  
+    if (!user) {
+      return  res.status(400).json({ message: "User not found!" });
+    }
+
+    // console.log(user.password);
+    
+  
+    const  isValidPassword = await bcrypt.compare(password, user.password)
+    console.log(password);
+    
+    // console.log(isValidPassword);
+    
+  
+    if (!isValidPassword) {
+      return  res.status(402).json("Invalid User!")
+    }
+  
+    const token = jwt.sign({ userId:user._id} , JWT_SECRET,{expiresIn:'1h'});
+  
+    return res.status(200).json({
+      message: 'Login Successful',
+      token, 
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Server error' });
+  }
+
+
+
+}
+
+
+export { registerUser , loginUser};
