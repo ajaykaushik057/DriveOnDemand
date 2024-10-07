@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
-import 'tailwindcss/tailwind.css';
+import React, { useState } from "react";
+import "tailwindcss/tailwind.css";
 
 const CarRental = () => {
   const [car, setCar] = useState({
-    name: '',
-    nameOnRC: '',
-    brand: '',
-    model: '',
-    year: '',
-    NoPlate: '',
+    name: "",
+    nameOnRC: "",
+    brand: "",
+    model: "",
+    year: "",
+    NoPlate: "",
     available: true,
-    pricePerDay: '',
-    seats: '',
-    fuelType: '',
-    transmission: '',
+    pricePerDay: "",
+    seats: "",
+    fuelType: "",
+    transmission: "",
     images: [],
-    availableDates: { from: '', to: '' },
+    availableDates: { from: "", to: "" },
   });
 
   const handleChange = (e) => {
@@ -28,19 +28,22 @@ const CarRental = () => {
     if (files.length <= 3) {
       setCar({ ...car, images: files });
     } else {
-      alert('You can only upload a maximum of 3 images.');
+      alert("You can only upload a maximum of 3 images.");
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Car Data Submitted:', car);
+    console.log("Car Data Submitted:", car);
     // You can submit the car data to the backend here
   };
 
   return (
     <div className="container mx-auto p-4">
-      <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-6">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white shadow-md rounded-lg p-6"
+      >
         <h1 className="text-2xl font-bold mb-6">Car Information Form</h1>
 
         {/* Car Name */}
@@ -59,7 +62,9 @@ const CarRental = () => {
 
         {/* Name on RC */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2">Name on RC</label>
+          <label className="block text-gray-700 font-bold mb-2">
+            Name on RC
+          </label>
           <input
             type="text"
             name="nameOnRC"
@@ -114,7 +119,9 @@ const CarRental = () => {
             />
           </div>
           <div>
-            <label className="block text-gray-700 font-bold mb-2">License Plate</label>
+            <label className="block text-gray-700 font-bold mb-2">
+              License Plate
+            </label>
             <input
               type="text"
               name="NoPlate"
@@ -130,7 +137,9 @@ const CarRental = () => {
         {/* Price, Seats, and Fuel Type */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
           <div>
-            <label className="block text-gray-700 font-bold mb-2">Price per Day</label>
+            <label className="block text-gray-700 font-bold mb-2">
+              Price per Day
+            </label>
             <input
               type="number"
               name="pricePerDay"
@@ -154,7 +163,9 @@ const CarRental = () => {
             />
           </div>
           <div>
-            <label className="block text-gray-700 font-bold mb-2">Fuel Type</label>
+            <label className="block text-gray-700 font-bold mb-2">
+              Fuel Type
+            </label>
             <select
               name="fuelType"
               value={car.fuelType}
@@ -172,7 +183,9 @@ const CarRental = () => {
 
         {/* Transmission */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2">Transmission</label>
+          <label className="block text-gray-700 font-bold mb-2">
+            Transmission
+          </label>
           <select
             name="transmission"
             value={car.transmission}
@@ -188,7 +201,9 @@ const CarRental = () => {
 
         {/* Car Images */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2">Car Images (Up to 3)</label>
+          <label className="block text-gray-700 font-bold mb-2">
+            Car Images (Up to 3)
+          </label>
           <input
             type="file"
             name="images"
@@ -198,30 +213,49 @@ const CarRental = () => {
             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           {car.images.length > 3 && (
-            <p className="text-red-500 mt-2">You can upload up to 3 images only!</p>
+            <p className="text-red-500 mt-2">
+              You can upload up to 3 images only!
+            </p>
           )}
         </div>
 
         {/* Available Dates */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div>
-            <label className="block text-gray-700 font-bold mb-2">Available From</label>
+            <label className="block text-gray-700 font-bold mb-2">
+              Available From
+            </label>
             <input
               type="date"
               name="from"
               value={car.availableDates.from}
-              onChange={(e) => setCar({ ...car, availableDates: { ...car.availableDates, from: e.target.value } })}
+              onChange={(e) =>
+                setCar({
+                  ...car,
+                  availableDates: {
+                    ...car.availableDates,
+                    from: e.target.value,
+                  },
+                })
+              }
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>
           <div>
-            <label className="block text-gray-700 font-bold mb-2">Available To</label>
+            <label className="block text-gray-700 font-bold mb-2">
+              Available To
+            </label>
             <input
               type="date"
               name="to"
               value={car.availableDates.to}
-              onChange={(e) => setCar({ ...car, availableDates: { ...car.availableDates, to: e.target.value } })}
+              onChange={(e) =>
+                setCar({
+                  ...car,
+                  availableDates: { ...car.availableDates, to: e.target.value },
+                })
+              }
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
@@ -239,7 +273,7 @@ const CarRental = () => {
         </div>
       </form>
     </div>
-    );
-  };
+  );
+};
 
-export default  CarRental;
+export default CarRental;

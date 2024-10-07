@@ -8,28 +8,23 @@ import Host from "./components/Host/Host";
 import Home from "./components/Home/Home";
 import LoginPage from "./components/Login/LoginPage";
 import Signup from "./components/Login/SignUp";
-import Location from "./components/Location/Location";
 import CarRental from "./components/Rental/CarRental";
 
 function App() {
   return (
     <div>
-      <Navbar/>
+      <Navbar />
       <Routes>
-       <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/host" element={<Host />} /> 
-        <Route path="/location" element={<Location />} /> 
+        <Route path="/host" element={<Host />} />
       </Routes>
-      <LoginPage/>  
-      <Signup/>
-      <Location/>
+      <LoginPage />
+      <Signup />
       <CarRental />
     </div>
   );
 }
 
 export default App;
-
-
