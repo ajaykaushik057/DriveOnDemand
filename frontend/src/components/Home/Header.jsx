@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { LocationContext } from "../../context/LocationContext";
+import { NavLink } from "react-router-dom";
 
 function Header() {
   const { location } = useContext(LocationContext);
@@ -19,9 +20,11 @@ function Header() {
           </p>
 
           <div className="flex justify-center items-center">
-            <button className="bg-[#EB8317] rounded-full text-[18px] px-5 py-3 text-white m-4 ">
-              Explore now
-            </button>
+            <NavLink to="/explore">
+              <button className="bg-[#EB8317] rounded-full text-[18px] px-5 py-3 text-white m-4 ">
+                Explore now
+              </button>
+            </NavLink>
             <p>in {location.city}</p>
           </div>
         </div>

@@ -5,7 +5,6 @@ import { IoNotifications } from "react-icons/io5";
 import { FaLocationDot } from "react-icons/fa6";
 import { HiMenu, HiX } from "react-icons/hi";
 import { LocationContext } from "../context/LocationContext";
-
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { location } = useContext(LocationContext);
@@ -49,6 +48,16 @@ const Navbar = () => {
             }
           >
             About
+          </NavLink>
+          <NavLink
+            to="/contact"
+            className={({ isActive }) =>
+              isActive
+                ? "text-white bg-gray-700 px-3 py-2 rounded-md text-[18px]"
+                : "text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-[18px] transition-all duration-200"
+            }
+          >
+            Contact
           </NavLink>
         </div>
 

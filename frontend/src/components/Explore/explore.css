@@ -1,0 +1,12 @@
+.akash2 {
+    opacity: 0; 
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out, transform 0.5s ease-in-out; 
+}
+
+.akash1:hover .akash2 {
+    opacity: 1; 
+    visibility: visible; 
+    transform: translateY(0); 
+}
