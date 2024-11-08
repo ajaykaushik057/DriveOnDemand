@@ -17,7 +17,7 @@ const userSchema = new Schema(
     },
     gender: {
       type: String,
-      enum: ["Male", "Female", "Other"],
+      enum: ["male", "female", "other"],
       required: true,
     },
     avatar: {
@@ -34,7 +34,7 @@ const userSchema = new Schema(
     },
     licenseExpiryDate: {
       type: Date,
-      required: true,
+      // required: true,
     },
     address: {
       type: String,

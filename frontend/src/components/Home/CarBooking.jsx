@@ -1,104 +1,43 @@
-import React, { useState, useEffect } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+// CarBooking.js
+import React from 'react';
 
-const CarBooking = () => {
-  const [location, setLocation] = useState('');
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
-  const [startTime, setStartTime] = useState(new Date());
-  const [endTime, setEndTime] = useState(new Date());
-  const [coords, setCoords] = useState(null);
+const CarBooking = ({ car = {} }) => {
+  // Default car data
+  const defaultCar = {
+    name: 'Toyota Corolla',
+    rentalPrice: 50,
+    location: 'Los Angeles, CA',
+    imageUrl: 'https://www.istockphoto.com/photo/3d-illustration-of-generic-compact-white-car-front-side-view-gm1150931120-311738229?utm_campaign=category_photos_top&utm_content=https%3A%2F%2Funsplash.com%2Fimages%2Fthings%2Fcar&utm_medium=affiliate&utm_source=unsplash&utm_term=Car+Images+%26+Pictures%3A%3Aaffiliate-collections%3Acontrol',
+  };
 
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setCoords({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-          });
-        },
-        (error) => {
-          console.error("Error getting location:", error);
-        }
-      );
-    } else {
-      console.log("Geolocation is not supported by this browser.");
-    }
-  }, []);
+  // Use provided car data or fallback to default data
+  const { name, rentalPrice, location, imageUrl } = {
+    ...defaultCar,
+    ...car,
+  };
 
-  const handleLocationChange = (event) => {
-    setLocation(event.target.value);
+  const handleBook = () => {
+    alert(`Booking car: ${name}`);
   };
 
   return (
-    <div className="p-4 rounded-lg bg-gray-200  shadow-md">
-      <div  className="flex flex-col items-center border-2 border-black  ">
-
-      <div className="flex flex-col mb-4 ">
-        <label htmlFor="location" className="text-gray-700 font-medium">
-          Location
-        </label>
-        <input
-          type="text"
-          id="location"
-          value={location}
-          onChange={handleLocationChange}
-          placeholder={coords ? `${coords.latitude}, ${coords.longitude}` : 'Enter location'}
-          className="border rounded-md py-2 px-3"
-        />
+    <div className="max-w-sm mx-auto bg-white shadow-md rounded-lg overflow-hidden mb-6">
+      <img src={imageUrl} alt={name} className="w-full h-48 object-cover" />
+      <div className="p-4">
+        <h2 className="text-xl font-bold mb-2">{name}</h2>
+        <p className="text-gray-700">
+          Rental Price: <span className="font-semibold">${rentalPrice}</span> / day
+        </p>
+        <p className="text-gray-700 mb-4">
+          Location: <span className="font-semibold">{location}</span>
+        </p>
+        <button
+          onClick={handleBook}
+          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+        >
+          Book
+        </button>
       </div>
-
-      <div className="flex flex-col mb-4">
-        <label htmlFor="startDate" className="text-gray-700 font-medium">Start Date</label>
-        <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-          className="border rounded-md py-2 px-3"
-        />
-      </div>
-
-      <div className="flex flex-col mb-4">
-        <label htmlFor="endDate" className="text-gray-700 font-medium">End Date</label>
-        <DatePicker
-          selected={endDate}
-          onChange={(date) => setEndDate(date)}
-          className="border rounded-md py-2 px-3"
-        />
-      </div>
-
-      <div className="flex flex-col mb-4">
-        <label htmlFor="startTime" className="text-gray-700 font-medium">Start Time</label>
-        <DatePicker
-          selected={startTime}
-          onChange={(time) => setStartTime(time)}
-          showTimeSelect
-          showTimeSelectOnly
-          timeIntervals={15}
-          timeCaption="Time"
-          dateFormat="h:mm aa"
-          className="border rounded-md py-2 px-3"
-        />
-      </div>
-
-      <div className="flex flex-col mb-4">
-        <label htmlFor="endTime" className="text-gray-700 font-medium">End Time</label>
-        <DatePicker
-          selected={endTime}
-          onChange={(time) => setEndTime(time)}
-          showTimeSelect
-          showTimeSelectOnly
-          timeIntervals={15}
-          timeCaption="Time"
-          dateFormat="h:mm aa"
-          className="border rounded-md py-2 px-3"
-        />
-      </div>
-
-      <button className="bg-medium text-white py-2 px-4 rounded-md">Get Car</button> 
-      </div>
-      
     </div>
   );
 };

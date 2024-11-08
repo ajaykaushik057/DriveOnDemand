@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from '../images/logo_.png'
+import logo from "../images/logo_.png";
 
 const Navbar = () => {
   const [dropdown, setDropdown] = useState(false);
@@ -57,11 +57,7 @@ const Navbar = () => {
           </div>
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex flex-shrink-0 items-center ">
-              <img
-                className="h-10 w-auto"
-                src={logo}
-                alt="Your Company"
-              />
+              <img className="h-10 w-auto" src={logo} alt="Your Company" />
             </div>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
@@ -115,6 +111,12 @@ const Navbar = () => {
                 />
               </svg>
             </button>
+            <Link
+              to="/login"
+              className="rounded-md px-3 py-2 text-sm font-medium text-medium  focus:bg-gray-700"
+            >
+              Login
+            </Link>
 
             {/* Profile dropdown */}
             <div className="relative ml-3 ">
@@ -147,7 +149,6 @@ const Navbar = () => {
                     to="#"
                     className="block px-4 py-2 text-sm text-gray-700"
                     role="menuitem"
-                    
                   >
                     Your Profile
                   </Link>
@@ -169,37 +170,6 @@ const Navbar = () => {
               )}
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Mobile menu */}
-      <div className="sm:hidden" id="mobile-menu">
-        <div className="space-y-1 px-2 pb-3 pt-2">
-          <Link
-            to="#"
-            className="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
-            aria-current="page"
-          >
-            Dashboard
-          </Link>
-          <Link
-            to="#"
-            className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-          >
-            Team
-          </Link>
-          <Link
-            to="#"
-            className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-          >
-            Projects
-          </Link>
-          <Link
-            to="#"
-            className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-          >
-            Calendar
-          </Link>
         </div>
       </div>
     </nav>
