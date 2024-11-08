@@ -1,10 +1,9 @@
 import { User } from "../models/user.models.js";
 import bcrypt from "bcryptjs";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
-import jwt  from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 
-
-const JWT_SECRET = process.env.JWT_SECRET
+const JWT_SECRET = process.env.JWT_SECRET;
 
 const registerUser = async (req, res) => {
   try {
@@ -71,52 +70,48 @@ const registerUser = async (req, res) => {
   }
 };
 
-const loginUser  = async (req, res) => {
+const loginUser = async (req, res) => {
   const { email, password } = req.body;
   console.log(req.body);
-  
-  if (!(email  && password)) {
 
-    return res.status(400).json("Email or Password required!")
+  if (!(email && password)) {
+    return res.status(400).json("Email or Password required!");
   }
 
   try {
-    const user = await User.findOne({email})
-  
+    const user = await User.findOne({ email });
+
     if (!user) {
-      return  res.status(400).json({ message: "User not found!" });
+      return res.status(400).json({ message: "Invalid Email or Password" });
     }
 
     // console.log(user.password);
-    
-  
-    const  isValidPassword = await bcrypt.compare(password, user.password)
+
+    const isValidPassword = await bcrypt.compare(password, user.password);
     console.log(password);
-    
+
     // console.log(isValidPassword);
-    
-  
+
     if (!isValidPassword) {
-      return  res.status(402).json("Invalid User!")
+      return res.status(402).json("Invalid Email or Password");
     }
-  
-    const token = jwt.sign({ userId:user._id} , JWT_SECRET,{expiresIn:'1h'});
-  
+
+    const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
+      expiresIn: "1h",
+    });
+
     return res.status(200).json({
-      message: 'Login Successful',
-      token, 
+      message: "Login Successful",
+      token,
     });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: 'Server error' });
+    return res.status(500).json({ message: "Server error" });
   }
 
-};
 
-const  logoutUser = async (req, res) => {
-  
+
 }
 
 
-
-export { registerUser , loginUser};
+export { registerUser, loginUser };

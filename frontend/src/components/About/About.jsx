@@ -1,6 +1,7 @@
 import React from "react";
 
 const About = () => {
+<<<<<<< HEAD
   return (
     <div className="min-h-screen w-full bg-dark p-4 md:p-8 lg:p-12">
       <div className="header text-white p-4 mb-8">
@@ -63,6 +64,9 @@ const About = () => {
       </div>
     </div>
   );
+=======
+  return <div>About</div>;
+>>>>>>> 24f90e2e5ed828a7d48cd3b753719116c546852b
 };
 
 export default About;
